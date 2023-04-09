@@ -1,4 +1,0 @@
-[submodule "Template/lvgl"]
-	path = Template/lvgl
-	url = https://github.com/lvgl/lvgl.git
-	branch = release/v8.2
