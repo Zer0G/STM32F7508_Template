@@ -34,43 +34,43 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := NEON_BOOT
+BUILD_ARTIFACT_NAME := STM32F7508Loader
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-NEON_BOOT.elf \
+STM32F7508Loader.elf \
 
 MAP_FILES += \
-NEON_BOOT.map \
+STM32F7508Loader.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-NEON_BOOT.list \
+STM32F7508Loader.list \
 
 OBJCOPY_HEX += \
-NEON_BOOT.hex \
+STM32F7508Loader.hex \
 
 OBJCOPY_BIN += \
-NEON_BOOT.bin \
+STM32F7508Loader.bin \
 
 OBJCOPY_SREC += \
-NEON_BOOT.srec \
+STM32F7508Loader.srec \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: NEON_BOOT.elf secondary-outputs
+main-build: STM32F7508Loader.elf secondary-outputs
 
 # Tool invocations
-NEON_BOOT.elf NEON_BOOT.map: $(OBJS) $(USER_OBJS) C:\Users\developer\cubeide\STM32F7508-DK-to-boot-from-qspi\NEON_BOOT\STM32F750N8HX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "NEON_BOOT.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\developer\cubeide\STM32F7508-DK-to-boot-from-qspi\NEON_BOOT\STM32F750N8HX_FLASH.ld" --specs=nosys.specs -Wl,-Map="NEON_BOOT.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+STM32F7508Loader.elf STM32F7508Loader.map: $(OBJS) $(USER_OBJS) C:\Users\developer\cubeide\STM32F7508_Template\STM32F7508Loader\STM32F750N8HX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "STM32F7508Loader.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m7 -T"C:\Users\developer\cubeide\STM32F7508_Template\STM32F7508Loader\STM32F750N8HX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32F7508Loader.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv5-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -79,29 +79,29 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NEON_BOOT.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "NEON_BOOT.list"
+STM32F7508Loader.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "STM32F7508Loader.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NEON_BOOT.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "NEON_BOOT.hex"
+STM32F7508Loader.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "STM32F7508Loader.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NEON_BOOT.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "NEON_BOOT.bin"
+STM32F7508Loader.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "STM32F7508Loader.bin"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-NEON_BOOT.srec: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O srec $(EXECUTABLES) "NEON_BOOT.srec"
+STM32F7508Loader.srec: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O srec $(EXECUTABLES) "STM32F7508Loader.srec"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) NEON_BOOT.bin NEON_BOOT.elf NEON_BOOT.hex NEON_BOOT.list NEON_BOOT.map NEON_BOOT.srec default.size.stdout
+	-$(RM) STM32F7508Loader.bin STM32F7508Loader.elf STM32F7508Loader.hex STM32F7508Loader.list STM32F7508Loader.map STM32F7508Loader.srec default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN) $(OBJCOPY_SREC)
